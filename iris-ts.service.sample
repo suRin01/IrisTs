@@ -1,0 +1,11 @@
+[Unit]
+Description=Iris compatible web controller
+
+[Service]
+ExecStart=node [ABSOLUTE_WORKING_DIR]/dist/index.js
+Restart=on-failure
+RestartSec=1s
+WorkingDirectory=[ABSOLUTE_WORKING_DIR]
+
+[Install]
+WantedBy=multi-user.target
