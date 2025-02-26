@@ -1,8 +1,10 @@
+import { Iris } from "../type/iris.js"
 import replier from "../helper/replier.js"
 
-const response = (room:string, msg:string, sender:string, msg_json:string, db:string, g:string)=>{
-    if(msg === "!hi"){
-        replier?.sendHttpRequest("normal", "hello", room)
+const response = (message:Iris.Message)=>{
+    console.log(message)
+    if(message.msg === "!hi"){
+        replier?.sendHttpRequest("normal", "hello", message.json.chat_id)
     }
 }
 

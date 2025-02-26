@@ -1,5 +1,5 @@
-import net from 'node:net';
 import fs from "fs";
+import axios from "axios"
 type ResponseType = "normal" | "image"
 interface IrisReplyVO {
     "isSuccess":boolean,
@@ -27,17 +27,13 @@ class Replier{
      * @returns 
      */
     public sendHttpRequest(type: ResponseType, data: string, room: string): boolean{
-        const connection = net.createConnection(this.botPort, this.botUrl, ()=>{
-            const sendMsgVO: IrisReplyVO = {
-                data: Buffer.from(data).toString('base64'),
-                isSuccess: true,
-                msgJson: "",
-                room: Buffer.from(room).toString('base64'),
-                type: type
-            }
-            connection.write(JSON.stringify(sendMsgVO));
-            connection.end();
-        });
+        axios.post(`http://${this.botUrl}:${this.botPort}/reply`, {
+            type,
+            room,
+            data
+        }, {
+            insecureHTTPParser: true
+        })
 
         return true;
     }
@@ -45,14 +41,15 @@ class Replier{
 }
 
 const ReplierFactory = ()=>{
-    const configJsonFile = fs.readFileSync('./data.json', 'utf8');
+    // TODO: check real json
+    const configJsonFile = fs.readFileSync('./config_real.json', 'utf8');
     const config = JSON.parse(configJsonFile);
 
-    if(!config["bot_endpoint"] || !config["web_server_endpoint"]){
+    if(!config["iris_endpoint"] || !config["iris_port"]){
         return null
     }
 
-    return new Replier(config["web_server_endpoint"]?? "", config["bot_endpoint"])
+    return new Replier(config["iris_endpoint"]?? "", config["iris_port"])
 }
 
 const replier = ReplierFactory()
