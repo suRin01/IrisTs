@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express"
+import express, { Request, Response } from "express"
 import response from "./chatbot/response"
 import { Iris } from "./type/iris";
 

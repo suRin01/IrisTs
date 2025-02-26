@@ -42,7 +42,12 @@ class Replier{
 
 const ReplierFactory = ()=>{
     // TODO: check real json
-    const configJsonFile = fs.readFileSync('./config_real.json', 'utf8');
+    if(fs.existsSync("./config_real.json")){
+        const configJsonFile = fs.readFileSync('./config_real.json', 'utf8');
+        const config = JSON.parse(configJsonFile);
+        return new Replier(config["iris_endpoint"]?? "", config["iris_port"])
+    }
+    const configJsonFile = fs.readFileSync('./config.json', 'utf8');
     const config = JSON.parse(configJsonFile);
 
     if(!config["iris_endpoint"] || !config["iris_port"]){
