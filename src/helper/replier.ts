@@ -1,4 +1,3 @@
-import fs from "fs";
 import axiosClient from "./axiosClient.js";
 type ResponseType = "normal" | "image"
 interface IrisReplyVO {
@@ -10,14 +9,6 @@ interface IrisReplyVO {
 }
 
 class Replier{
-    private botUrl: string;
-    private botPort: number;
-
-
-    constructor(botUrl:string, botPort: number){
-        this.botUrl = botUrl
-        this.botPort = botPort
-    }
 
     /**
      * 
@@ -27,7 +18,7 @@ class Replier{
      * @returns 
      */
     public sendHttpRequest(type: ResponseType, data: string, room: string): boolean{
-        axiosClient.post("/reply", {
+        axiosClient.post<IrisReplyVO>("/reply", {
             type,
             room,
             data
@@ -38,21 +29,5 @@ class Replier{
 
 }
 
-const ReplierFactory = ()=>{
-    if(fs.existsSync("./config_real.json")){
-        const configJsonFile = fs.readFileSync('./config_real.json', 'utf8');
-        const config = JSON.parse(configJsonFile);
-        return new Replier(config["iris_endpoint"]?? "", config["iris_port"])
-    }
-    const configJsonFile = fs.readFileSync('./config.json', 'utf8');
-    const config = JSON.parse(configJsonFile);
-
-    if(!config["iris_endpoint"] || !config["iris_port"]){
-        return null
-    }
-
-    return new Replier(config["iris_endpoint"]?? "", config["iris_port"])
-}
-
-const replier = ReplierFactory()
+const replier = new Replier()
 export = replier
