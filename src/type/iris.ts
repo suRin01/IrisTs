@@ -1,5 +1,5 @@
 
-export namespace Iris{
+export namespace Iris {
     /**
      * msg: string, decryped plain msg <br/>
      * room: string, decrpted plain room name \n
@@ -25,14 +25,22 @@ export namespace Iris{
         referer: string,
         v: string,
         attachment: string
-        }
-    
-    export interface QueryRequest {
-        query: string // SQL query string
-      }
-    export interface QueryResponse<T>{
+    }
+
+    export interface QueryResponse<T> {
         success: boolean,
         data: T[]
+    }
+    export interface QueryRequest {
+        query: string,
+        bind: any[]
+    }
+    export interface QueriesRequest {
+        queries: QueryRequest[]
+    }
+    export interface QueriesResponse {
+        success: boolean,
+        data: any[][]
     }
     export interface DecryptRequest {
         enc: number, // Encryption type (integer from database)
@@ -42,14 +50,12 @@ export namespace Iris{
     export interface DecryptResponse {
         plain_text: string
     }
-    export interface Query {
-        query: string,
-        bind: any[]
-    }
-    export interface QueriesRequest {
-        queries: Query[]
-    }
-    export interface QueriesResponse{
-    
+
+
+    //db table interface 
+    //db2.room_master_table
+    export interface RoomMasterTable {
+        "id": number,
+        "identity_hash": string
     }
 }

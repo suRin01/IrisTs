@@ -1,5 +1,5 @@
 import fs from "fs";
-import axios from "axios"
+import axiosClient from "./axiosClient.js";
 type ResponseType = "normal" | "image"
 interface IrisReplyVO {
     "isSuccess":boolean,
@@ -27,12 +27,10 @@ class Replier{
      * @returns 
      */
     public sendHttpRequest(type: ResponseType, data: string, room: string): boolean{
-        axios.post(`http://${this.botUrl}:${this.botPort}/reply`, {
+        axiosClient.post("/reply", {
             type,
             room,
             data
-        }, {
-            insecureHTTPParser: true
         })
 
         return true;
@@ -41,7 +39,6 @@ class Replier{
 }
 
 const ReplierFactory = ()=>{
-    // TODO: check real json
     if(fs.existsSync("./config_real.json")){
         const configJsonFile = fs.readFileSync('./config_real.json', 'utf8');
         const config = JSON.parse(configJsonFile);
