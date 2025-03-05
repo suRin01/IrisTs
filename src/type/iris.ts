@@ -5,6 +5,15 @@ export namespace Iris {
      * room: string, decrpted plain room name \n
      * sender: string, decrpted plain sender name \n
      */
+    export const Response = {
+        NORMAL : "normal",
+        IMAGE: "image",
+        IMAGE_MULTIPLE: "image_multiple",
+    } 
+    export type ResponseType = typeof Response[keyof typeof Response]
+    export interface Reply {
+        "success":boolean,
+    }
     export interface Message {
         msg: string,
         room: string,
