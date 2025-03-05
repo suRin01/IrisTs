@@ -12,7 +12,8 @@ const axiosClient = (()=>{
 })()
 
 axiosClient.interceptors.request.use((config: axios.InternalAxiosRequestConfig<any>)=>{
-    console.log(config)
+    console.log(config.data)
+    
 
 
     return config
