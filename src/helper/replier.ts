@@ -11,7 +11,7 @@ class Replier{
      * @param room 
      * @returns 
      */
-    private async sendHttpRequest(type: Iris.ResponseType, data: string, room: string): Promise<boolean>{
+    private async sendHttpRequest(type: Iris.ResponseType, data: string|string[], room: string): Promise<boolean>{
         return (await axiosClient.post<Iris.Reply>("/reply", {
             type,
             room,
@@ -23,12 +23,12 @@ class Replier{
         this.sendHttpRequest(Iris.Response.NORMAL, message, room)
     }
 
-    public sendImage(imageBuffer: Buffer, room: string){
-        this.sendHttpRequest(Iris.Response.IMAGE, imageBuffer.toString("base64"), room)
+    public sendImage(imageB64String: string, room: string){
+        this.sendHttpRequest(Iris.Response.IMAGE, imageB64String, room)
     }
 
-    public sendImages(imageBuffers: Buffer[], room: string){
-        this.sendHttpRequest(Iris.Response.IMAGE_MULTIPLE, JSON.stringify(imageBuffers.map(buf => buf.toString("base64"))), room)
+    public sendImages(imageB64ArrString: string[], room: string){
+        this.sendHttpRequest(Iris.Response.IMAGE_MULTIPLE, imageB64ArrString, room)
 
     }
 
