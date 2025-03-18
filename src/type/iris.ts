@@ -6,7 +6,7 @@ export namespace Iris {
      * sender: string, decrpted plain sender name \n
      */
     export const Response = {
-        NORMAL : "normal",
+        TEXT : "text",
         IMAGE: "image",
         IMAGE_MULTIPLE: "image_multiple",
     } 
