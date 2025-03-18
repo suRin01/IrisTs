@@ -10,16 +10,10 @@ const response = (message:Iris.Message)=>{
         AdminRouter(message)
     }
     if(message.msg === "!img"){
-        
         replier?.sendImage(emojiHandler("[버럭코"), message.json.chat_id)
     }else if(message.msg === "!imgs"){
-        
         replier?.sendImages([emojiHandler("[버럭코"), emojiHandler("[버럭코")], message.json.chat_id)
     }
-
-    console.log(message)
-    
-
 
 }
 
