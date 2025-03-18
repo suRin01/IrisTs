@@ -6,7 +6,7 @@ class Replier{
 
     /**
      * 
-     * @param type: ResponseType "normal" | "image" | "image_multiple"
+     * @param type: ResponseType "text" | "image" | "image_multiple"
      * @param data 
      * @param room 
      * @returns 
