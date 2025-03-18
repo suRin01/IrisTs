@@ -20,7 +20,7 @@ class Replier{
     }
 
     public sendMessage(message: string, room: string){
-        this.sendHttpRequest(Iris.Response.NORMAL, message, room)
+        this.sendHttpRequest(Iris.Response.TEXT, message, room)
     }
 
     public sendImage(imageB64String: string, room: string){
