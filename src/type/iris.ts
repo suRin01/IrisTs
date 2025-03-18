@@ -60,6 +60,15 @@ export namespace Iris {
         plain_text: string
     }
 
+    export interface Config {
+        bot_name: string,
+        bot_http_port: number,
+        web_server_endpoint: string,
+        db_polling_rate: number,
+        message_send_rate: number,
+        bot_id: number
+    }
+
 
     //db table interface 
     //db2.room_master_table
