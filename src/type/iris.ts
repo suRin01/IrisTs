@@ -69,6 +69,12 @@ export namespace Iris {
         bot_id: number
     }
 
+    export interface KakaoLinkTemplateArgs {
+        link_ver: string,
+        template_id: number,
+        template_args: { [key: string]: string | number }
+    }
+    
 
     //db table interface 
     //db2.room_master_table

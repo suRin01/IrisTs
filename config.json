@@ -1,4 +1,6 @@
 {
     "iris_endpoint" : "YOUR_IRIS_ENDPOINT",
-    "iris_port" : "YOUR_IRIS_PORT"
+    "iris_port" : "YOUR_IRIS_PORT",
+    "kakao_registered_domain" : "YOUR_KAKAO_REGISTERED_DOMAIN",
+    "kakao_api_key" : "YOUR_KAKAO_API_JS_KEY"
 }
