@@ -1,5 +1,6 @@
 import { Iris } from "../type/iris.js";
 import axiosClient from "./axiosClient.js";
+import KakaoLinkClient from "./kakaolink.js"
 
 
 class Replier{
@@ -30,6 +31,22 @@ class Replier{
     public sendImages(imageB64ArrString: string[], room: string){
         this.sendHttpRequest(Iris.Response.IMAGE_MULTIPLE, imageB64ArrString, room)
 
+    }
+
+    /**
+     * Send KakaoLink Request
+     * @param room 
+     * @param templateId KakaoLink Template ID
+     * @param templateArgs KakaoLink Template Arguments (key-value)
+     * @returns true | false
+     */
+    public async sendKakaoLink(room: string, templateId: number, templateArgs: { [key: string]: string }): Promise<boolean> {
+        try {
+            return await KakaoLinkClient.sendLink(room, templateId, templateArgs);
+        } catch (error) {
+            console.error("Failed to send KakaoLink : ", error);
+            return false;
+        }
     }
 
 }
